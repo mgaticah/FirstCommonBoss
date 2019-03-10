@@ -28,5 +28,16 @@ public class tests{
         FirstCommonBoss(I,D)=A
      */
 
+/**
+    firstable, i'll need to populate this organizational tree
+ */
+    [Fact]
+    public void InsertPerson()
+    {
+        //I assume we'd need a methos to add employees to this tree
+        //Organization.AddEmployee(string EmployeeName, string EmployeeBossName);
 
+        //So, try to add first employee
+        Organization.AddEmployee("A", null); 
+    }
 }

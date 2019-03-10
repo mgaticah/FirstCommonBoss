@@ -1,2 +1,6 @@
 obj/Debug
 obj/Debug/netcoreapp2.1/commonBoss.csproj.CoreCompileInputs.cache
+obj/commonBoss.csproj.nuget.cache
+obj/commonBoss.csproj.nuget.g.props
+obj/Debug/netcoreapp2.1/commonBoss.assets.cache
+obj/Debug/netcoreapp2.1/commonBoss.csproj.CoreCompileInputs.cache
