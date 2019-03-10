@@ -32,7 +32,7 @@ public class Organization{
 
     }
 
-    private Employee FindEmployeeInColaborators(string employeeName, Employee head)
+    public Employee FindEmployeeInColaborators(string employeeName, Employee head)
     {
         if(head.GetEmployeeName().Equals(employeeName) )
             return head;
@@ -40,10 +40,14 @@ public class Organization{
                 if(colaborator.GetEmployeeName().Equals(employeeName))
                     return colaborator;
                 else if (colaborator.HasColaborators()) 
-                    return FindEmployeeInColaborators(employeeName,colaborator);
+                {
+                    var possibleFinding=FindEmployeeInColaborators(employeeName,colaborator);
+                    if(possibleFinding!=null) 
+                        return possibleFinding;
+                }
         return null;
     }
-    private Employee FindEmployee(string employeeName)
+    public Employee FindEmployee(string employeeName)
     {
         if(Head==null)
             return null;

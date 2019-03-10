@@ -52,4 +52,23 @@ public class tests{
         organization.AddEmployee("B", "A"); 
         organization.AddEmployee("E", "B"); 
     }
+
+    [Fact]
+    public void CreateComplexOrganizationalTree()
+    {
+        var organization=new Organization();
+        organization.AddEmployee("A", null); 
+        organization.AddEmployee("B", "A"); 
+        organization.AddEmployee("C", "A"); 
+        organization.AddEmployee("D", "A"); 
+        organization.AddEmployee("E", "B"); 
+        organization.AddEmployee("F", "B"); 
+        organization.AddEmployee("G", "B"); 
+        organization.AddEmployee("H", "C"); 
+        organization.AddEmployee("I", "H"); 
+        organization.AddEmployee("J", "I"); 
+        organization.AddEmployee("K", "I"); 
+        organization.AddEmployee("L", "K"); 
+        Assert.Equal(organization.FindEmployee("L").GetBossName(),"K");
+    }
 }
