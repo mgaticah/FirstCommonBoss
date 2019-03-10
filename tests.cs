@@ -38,6 +38,7 @@ public class tests{
         //Organization.AddEmployee(string EmployeeName, string EmployeeBossName);
 
         //So, try to add first employee
-        Organization.AddEmployee("A", null); 
+        var organization=new Organization();
+        organization.AddEmployee("A", null); 
     }
 }
