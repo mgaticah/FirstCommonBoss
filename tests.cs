@@ -34,20 +34,12 @@ public class tests{
     [Fact]
     public void InsertFirstPerson()
     {
-        //I assume we'd need a methos to add employees to this tree
-        //Organization.AddEmployee(string EmployeeName, string EmployeeBossName);
-
-        //So, try to add first employee
         var organization=new Organization();
         organization.AddEmployee("A", null); 
     }
     [Fact]
     public void InsertFirstPersonUnderMainBoss()
     {
-        //I assume we'd need a methos to add employees to this tree
-        //Organization.AddEmployee(string EmployeeName, string EmployeeBossName);
-
-        //So, try to add first employee
         var organization=new Organization();
         organization.AddEmployee("A", null); 
         organization.AddEmployee("B", "A"); 
@@ -55,10 +47,6 @@ public class tests{
     [Fact]
     public void InsertFirstPersonUnderANonMainBoss()
     {
-        //I assume we'd need a methos to add employees to this tree
-        //Organization.AddEmployee(string EmployeeName, string EmployeeBossName);
-
-        //So, try to add first employee
         var organization=new Organization();
         organization.AddEmployee("A", null); 
         organization.AddEmployee("B", "A"); 

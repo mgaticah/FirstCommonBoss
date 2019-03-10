@@ -26,11 +26,23 @@ public class Organization{
         {
             var newEmployeeBoss= FindEmployee(bossName);
             newEmployee.SetBoss(newEmployeeBoss);
+            newEmployeeBoss.AddColaborator(newEmployee);
         }
         
 
     }
 
+    private Employee FindEmployeeInColaborators(string employeeName, Employee head)
+    {
+        if(head.GetEmployeeName().Equals(employeeName) )
+            return head;
+        foreach(var colaborator in head.GetColaborators())
+                if(colaborator.GetEmployeeName().Equals(employeeName))
+                    return colaborator;
+                else if (colaborator.HasColaborators()) 
+                    return FindEmployeeInColaborators(employeeName,colaborator);
+        return null;
+    }
     private Employee FindEmployee(string employeeName)
     {
         if(Head==null)
@@ -38,6 +50,6 @@ public class Organization{
         if(Head.GetEmployeeName().Equals(employeeName))
             return Head;
         else
-            throw new NotImplementedException();
+            return FindEmployeeInColaborators(employeeName, Head);
     }
 }
