@@ -56,20 +56,9 @@ public class tests{
     [Fact]
     public void CreateComplexOrganizationalTree()
     {
-        var organization=new Organization();
-        organization.AddEmployee("A", null); 
-        organization.AddEmployee("B", "A"); 
-        organization.AddEmployee("C", "A"); 
-        organization.AddEmployee("D", "A"); 
-        organization.AddEmployee("E", "B"); 
-        organization.AddEmployee("F", "B"); 
-        organization.AddEmployee("G", "B"); 
-        organization.AddEmployee("H", "C"); 
-        organization.AddEmployee("I", "H"); 
-        organization.AddEmployee("J", "I"); 
-        organization.AddEmployee("K", "I"); 
-        organization.AddEmployee("L", "K"); 
-        Assert.Equal(organization.FindEmployee("L").GetBossName(),"K");
+        var organization=GetPopulatedOrganization();
+        
+        Assert.Equal("K",organization.FindEmployee("L").GetBossName());
     }
      
     private Organization GetPopulatedOrganization()
@@ -95,7 +84,7 @@ public class tests{
         var organization= GetPopulatedOrganization();
         var employeeL=organization.FindEmployee("L");
         var directLBoss=organization.FindEmployeeInBosses("K", employeeL );
-        Assert.Equal(directLBoss.GetEmployeeName(), "K");
+        Assert.Equal("K",directLBoss.GetEmployeeName());
     }
     [Fact]
     public void FindEmployeeInUpperHierarchy()
@@ -103,7 +92,7 @@ public class tests{
         var organization= GetPopulatedOrganization();
         var employeeL=organization.FindEmployee("L");
         var higherLBoss=organization.FindEmployeeInBosses("H", employeeL );
-        Assert.Equal(higherLBoss.GetEmployeeName(), "K");
+        Assert.Equal("H", higherLBoss.GetEmployeeName());
     }
      [Fact]
     public void FindEmployeeInANonRelatedUpperHierarchy()
@@ -111,7 +100,27 @@ public class tests{
         var organization= GetPopulatedOrganization();
         var employeeL=organization.FindEmployee("L");
         var higherNonRelatedLBoss=organization.FindEmployeeInBosses("B", employeeL );
-        Assert.Equal(higherNonRelatedLBoss, null);
+        Assert.Equal(null, higherNonRelatedLBoss);
     }
-
+ [Fact]
+    public void FindFirstCommonBossBetweenTwoEmployeesDirectlyRelated()
+    {
+        var organization= GetPopulatedOrganization();
+        var employeeL=organization.FindEmployee("L");
+        var employeeK=organization.FindEmployee("K");
+        var firstCommonBoss=organization.FindFirstCommonBoss(employeeK, employeeL);
+        Assert.Equal("K",firstCommonBoss.GetEmployeeName());
+    }
+     [Fact]
+    public void FindFirstCommonBossBetweenTwoEmployeesNonDirectlyRelated()
+    {
+        var organization= GetPopulatedOrganization();
+        var employeeL=organization.FindEmployee("L");
+        var employeeJ=organization.FindEmployee("J");
+        var employeeG=organization.FindEmployee("G");
+        var firstCommonBoss=organization.FindFirstCommonBoss(employeeJ, employeeL);
+        Assert.Equal( "I",firstCommonBoss.GetEmployeeName());
+         firstCommonBoss=organization.FindFirstCommonBoss(employeeJ, employeeG);
+        Assert.Equal("A",firstCommonBoss.GetEmployeeName());
+    }
 }

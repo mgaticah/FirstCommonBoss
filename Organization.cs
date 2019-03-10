@@ -1,5 +1,5 @@
 using System;
-
+using System.Collections.Generic;
 public class Organization{
 
     Employee Head;
@@ -58,5 +58,32 @@ public class Organization{
             return Head;
         else
             return FindEmployeeInColaborators(employeeName, Head);
+    }
+
+    internal Employee FindFirstCommonBoss(Employee employeeA, Employee employeeB)
+    {
+        if(employeeA.GetEmployeeName().Equals(employeeB.GetBossName()))
+            return employeeA;
+        if(employeeB.GetEmployeeName().Equals(employeeA.GetBossName()))
+            return employeeB;
+        var hierarchyEmployeeA=new List<Employee>();
+        var hierarchyEmployeeB=new List<Employee>();
+        Employee temp=employeeA;
+        while(temp!=null)
+        {
+            hierarchyEmployeeA.Add(temp);
+            temp=temp.GetBoss();            
+        }
+        temp=employeeB;
+        while(temp!=null)
+        {
+            hierarchyEmployeeB.Add(temp);
+            temp=temp.GetBoss();            
+        }
+        foreach(var bossA in hierarchyEmployeeA)
+            foreach(var bossB in hierarchyEmployeeB)
+                if(bossA.GetEmployeeName().Equals(bossB.GetEmployeeName()))
+                    return bossA;
+        return null;
     }
 }
