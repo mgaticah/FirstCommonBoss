@@ -71,4 +71,47 @@ public class tests{
         organization.AddEmployee("L", "K"); 
         Assert.Equal(organization.FindEmployee("L").GetBossName(),"K");
     }
+     
+    private Organization GetPopulatedOrganization()
+    {
+        var organization=new Organization();
+        organization.AddEmployee("A", null); 
+        organization.AddEmployee("B", "A"); 
+        organization.AddEmployee("C", "A"); 
+        organization.AddEmployee("D", "A"); 
+        organization.AddEmployee("E", "B"); 
+        organization.AddEmployee("F", "B"); 
+        organization.AddEmployee("G", "B"); 
+        organization.AddEmployee("H", "C"); 
+        organization.AddEmployee("I", "H"); 
+        organization.AddEmployee("J", "I"); 
+        organization.AddEmployee("K", "I"); 
+        organization.AddEmployee("L", "K"); 
+        return organization;
+    }
+    [Fact]
+    public void FindEmployeeBoss()
+    {
+        var organization= GetPopulatedOrganization();
+        var employeeL=organization.FindEmployee("L");
+        var directLBoss=organization.FindEmployeeInBosses("K", employeeL );
+        Assert.Equal(directLBoss.GetEmployeeName(), "K");
+    }
+    [Fact]
+    public void FindEmployeeInUpperHierarchy()
+    {
+        var organization= GetPopulatedOrganization();
+        var employeeL=organization.FindEmployee("L");
+        var higherLBoss=organization.FindEmployeeInBosses("H", employeeL );
+        Assert.Equal(higherLBoss.GetEmployeeName(), "K");
+    }
+     [Fact]
+    public void FindEmployeeInANonRelatedUpperHierarchy()
+    {
+        var organization= GetPopulatedOrganization();
+        var employeeL=organization.FindEmployee("L");
+        var higherNonRelatedLBoss=organization.FindEmployeeInBosses("B", employeeL );
+        Assert.Equal(higherNonRelatedLBoss, null);
+    }
+
 }

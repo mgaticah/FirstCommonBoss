@@ -11,10 +11,6 @@ public class Organization{
     public void AddEmployee(string employeeName, string bossName)
     {   
         var newEmployee= new Employee(employeeName);
-        //do this employee had a boss? FALSE => it's main boss(head)
-        //                             FALSE => It's there a previos main boss?
-        //                             TRUE =>  is required to find it into the organization 
-        //                                      and set him as new employee's boss
         if(string.IsNullOrEmpty(bossName))
         {
             if(Head==null)
@@ -31,7 +27,14 @@ public class Organization{
         
 
     }
-
+    public Employee FindEmployeeInBosses(string employeeName, Employee employee)
+    {
+        if(employee.GetEmployeeName().Equals(employeeName))
+            return employee;
+        if(employee.GetBoss()==null)
+            return null;
+        return FindEmployeeInBosses(employeeName, employee.GetBoss());
+    }
     public Employee FindEmployeeInColaborators(string employeeName, Employee head)
     {
         if(head.GetEmployeeName().Equals(employeeName) )
