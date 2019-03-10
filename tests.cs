@@ -32,7 +32,7 @@ public class tests{
     firstable, i'll need to populate this organizational tree
  */
     [Fact]
-    public void InsertPerson()
+    public void InsertFirstPerson()
     {
         //I assume we'd need a methos to add employees to this tree
         //Organization.AddEmployee(string EmployeeName, string EmployeeBossName);
@@ -41,4 +41,17 @@ public class tests{
         var organization=new Organization();
         organization.AddEmployee("A", null); 
     }
+    [Fact]
+    public void InsertFirstPersonUnderMainBoss()
+    {
+        //I assume we'd need a methos to add employees to this tree
+        //Organization.AddEmployee(string EmployeeName, string EmployeeBossName);
+
+        //So, try to add first employee
+        var organization=new Organization();
+        organization.AddEmployee("A", null); 
+        organization.AddEmployee("B", "A"); 
+        
+    }
+
 }
