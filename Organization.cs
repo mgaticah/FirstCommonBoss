@@ -31,8 +31,13 @@ public class Organization{
 
     }
 
-    private Employee FindEmployee(string bossName)
+    private Employee FindEmployee(string employeeName)
     {
-        throw new NotImplementedException();
+        if(Head==null)
+            return null;
+        if(Head.GetEmployeeName().Equals(employeeName))
+            return Head;
+        else
+            throw new NotImplementedException();
     }
 }

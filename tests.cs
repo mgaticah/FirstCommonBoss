@@ -51,7 +51,17 @@ public class tests{
         var organization=new Organization();
         organization.AddEmployee("A", null); 
         organization.AddEmployee("B", "A"); 
-        
     }
+    [Fact]
+    public void InsertFirstPersonUnderANonMainBoss()
+    {
+        //I assume we'd need a methos to add employees to this tree
+        //Organization.AddEmployee(string EmployeeName, string EmployeeBossName);
 
+        //So, try to add first employee
+        var organization=new Organization();
+        organization.AddEmployee("A", null); 
+        organization.AddEmployee("B", "A"); 
+        organization.AddEmployee("E", "B"); 
+    }
 }
